@@ -9,11 +9,9 @@ const ReviewsStar = ({ numOfStars = 5 }) => {
 
 	const handleClick = (getCurrentIndex) => {
 		setRating(getCurrentIndex);
-		console.log('click');
 	};
 	const handleMouseEnter = (getCurrentIndex) => {
 		setHover(getCurrentIndex);
-		console.log(`mouse move: ${getCurrentIndex}`);
 	};
 	const handleMouseLeave = () => {
 		setHover(rating);
