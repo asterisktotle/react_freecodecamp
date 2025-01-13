@@ -1,10 +1,10 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 const ImageSlider = ({ url, limit, page }) => {
-	const [images, setImages] = useState([]);
+	const [images, setImages] = useState([]); //stores images
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [loading, setLoading] = useState(false);
 
@@ -32,16 +32,16 @@ const ImageSlider = ({ url, limit, page }) => {
 	return (
 		<div className="relative flex items-center justify-center ">
 			<FontAwesomeIcon
-				className=" absolute left-[1rem] sm:right-[18%] md:left-[18%] lg:left-[25%] xl:left-[32%] 2xl:left-[40%] z-10 cursor-pointer bg-slate-600 p-2 rounded-full bg-opacity-50 hover:bg-opacity-80 "
+				className=" absolute left-[1rem] max-sm:max-md:left-[1rem] max-md:left-[18%] lg:left-[25%] xl:left-[32%] 2xl:left-[40%] z-10 cursor-pointer bg-slate-600 p-2 rounded-full bg-opacity-50 hover:bg-opacity-80 "
 				icon={faArrowLeft}
 				inverse
 				onClick={() =>
 					setCurrentSlide((prev) => (prev - 1 + images.length) % images.length)
 				}
 			/>
-			<div className="flex overflow-hidden w-[500px] md:w-[400px] rounded-2xl ">
+			<div className="flex overflow-hidden w-[500px] max-md:w-[400px] max-sm:w-[300px] max-lg:w-[400px] rounded-2xl ">
 				<div
-					className="flex transition-transform duration-300 ease-out "
+					className="flex transition-transform duration-500 ease-out "
 					style={{ transform: `translateX(-${currentSlide * 100}%)` }}
 				>
 					{!loading && images.length ? (
@@ -52,8 +52,8 @@ const ImageSlider = ({ url, limit, page }) => {
 								height={500}
 								width={500}
 								alt={imagesItem.download_url}
-								className={`w-full max-h-[300px] sm:max-[400px] lg:max-h-[500px] object-cover transition-opacity duration-300 rounded-xl ${
-									currentSlide !== index && 'opacity-50'
+								className={`w-full max-h-[300px]  max-md:max-sm:max-h-[300px]  lg:max-h-[500px] object-cover transition-opacity duration-300 rounded-xl ${
+									currentSlide !== index && 'opacity-10'
 								}`}
 							/>
 						))
@@ -64,7 +64,7 @@ const ImageSlider = ({ url, limit, page }) => {
 			</div>
 			<FontAwesomeIcon
 				icon={faArrowRight}
-				className="absolute right-[1rem] sm:right-[18%] md:right-[18%] lg:right-[25%] xl:right-[32%] 2xl:right-[40%] z-10 cursor-pointer bg-slate-700 bg-opacity-50 hover:bg-opacity-80 rounded-full p-2"
+				className="absolute right-[1rem] sm:right-[18%] max-md:right-[18%] lg:right-[25%] xl:right-[32%] 2xl:right-[40%] z-10 cursor-pointer bg-slate-700 bg-opacity-50 hover:bg-opacity-80 rounded-full p-2"
 				onClick={() =>
 					setCurrentSlide((prev) => (prev + 1 + images.length) % images.length)
 				}
