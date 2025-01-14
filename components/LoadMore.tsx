@@ -14,7 +14,7 @@ const LoadMore = () => {
 			const response = await fetch(
 				`https://dummyjson.com/products?limit=20&skip=${
 					count === 0 ? 0 : count * 20
-				}&select=title,images,thumbnail,price,`
+				}&select=title,images,price,`
 			);
 
 			if (!response.ok) {
@@ -45,8 +45,6 @@ const LoadMore = () => {
 			if (!Array.isArray(data.products)) {
 				throw new Error('Invalid response format');
 			}
-			console.log(data.products);
-			console.log(data.products[0]);
 
 			setProducts((prevData) => [...prevData, ...data.products]);
 		} catch (error) {
@@ -67,9 +65,9 @@ const LoadMore = () => {
 
 	const ProductSection = () => {
 		return products && products.length
-			? products.map((item) => (
+			? products.map((item, index) => (
 					<div
-						key={`${item.id}-${item.title}`}
+						key={`${item.id}-${item.title}-${index}`}
 						className="p-5 border-4 border-gray-400 flex flex-col justify-between gap-[10px]"
 					>
 						<Image
@@ -100,7 +98,7 @@ const LoadMore = () => {
 	return (
 		<div className="container flex flex-col gap-[20px] items-center">
 			<h1 className="font-bold text-2xl">Online Store</h1>
-			<section className="grid lg:grid-cols-6 grid-cols-4 gap-[10px] size-[20rem] lg:size-[auto]">
+			<section className="grid lg:grid-cols-5 grid-cols-4 gap-[10px] size-[20rem] lg:size-[auto]">
 				<ProductSection />
 			</section>
 			<button

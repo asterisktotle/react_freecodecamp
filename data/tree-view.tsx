@@ -5,15 +5,15 @@ export const menus = [
 	},
 	{
 		label: 'Profile',
-		to: '/profile',
+		to: '/',
 		children: [
 			{
 				label: 'Details',
-				to: 'details',
+				to: '/',
 				children: [
 					{
 						label: 'Location',
-						to: 'location',
+						to: '/',
 					},
 				],
 			},
@@ -21,26 +21,30 @@ export const menus = [
 	},
 	{
 		label: 'Settings',
-		to: '/settings',
+		to: '/',
 		children: [
 			{
 				label: 'Account',
-				to: 'account',
+				to: '/',
 			},
 			{
 				label: 'Security',
-				to: 'security',
+				to: '/',
 				children: [
 					{
 						label: 'Login',
-						to: 'login',
+						to: '/',
 					},
 					{
 						label: 'Register',
-						to: 'register',
+						to: '/',
 					},
 				],
 			},
 		],
+	},
+	{
+		label: 'Shop',
+		to: '/Dummy_Product',
 	},
 ];

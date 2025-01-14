@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Link from 'next/link';
 
 import ListMenu from './ListMenu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,7 +23,7 @@ const ItemMenu = ({ item }) => {
 	return (
 		<li className="">
 			<div className="flex gap-2 justify-between">
-				<p>{item.label}</p>
+				<Link href={item.to}>{item.label}</Link>
 				{item && item.children && item.children.length ? (
 					<span
 						className="cursor-pointer hover:font-bold"
