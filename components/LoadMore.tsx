@@ -69,7 +69,7 @@ const LoadMore = () => {
 		return products && products.length
 			? products.map((item) => (
 					<div
-						key={item.id}
+						key={`${item.id}-${item.title}`}
 						className="p-5 border-4 border-gray-400 flex flex-col justify-between gap-[10px]"
 					>
 						<Image
