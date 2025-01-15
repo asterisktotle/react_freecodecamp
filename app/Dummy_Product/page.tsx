@@ -1,10 +1,13 @@
 import LoadMore from '@/components/LoadMore';
+import ThemeSwitch from '@/components/ThemeSwitch';
 
 const Product = () => {
 	return (
-		<div className="m-2 flex justify-center">
-			<LoadMore />
-		</div>
+		<ThemeSwitch>
+			<div className="m-2 flex justify-center">
+				<LoadMore />
+			</div>
+		</ThemeSwitch>
 	);
 };
 
