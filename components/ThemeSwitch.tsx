@@ -21,11 +21,11 @@ const ThemeSwitch = ({ children }) => {
 
 	return (
 		<div
-			className={
+			className={`${
 				theme === 'dark'
 					? 'bg-black text-white transition-colors duration-500'
 					: 'bg-white text-black transition-colors duration-1000'
-			}
+			}`}
 		>
 			<button
 				className="border-green-400 border-2 rounded ml-3"

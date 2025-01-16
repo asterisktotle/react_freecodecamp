@@ -9,11 +9,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className="flex">
-				<div className="sticky top-0 h-screen">
+			<body className="flex min-h-screen overflow-x-hidden">
+				<aside className="sticky top-0 h-screen mr-5 overflow-y-auto">
 					<TreeView menus={menus} />
-				</div>
-				<div className="flex-1">{children}</div>
+				</aside>
+				<main className="flex-1 overflow-y-auto">{children}</main>
 			</body>
 		</html>
 	);

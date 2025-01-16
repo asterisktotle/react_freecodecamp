@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 const ScrollIndicator = ({ url }) => {
 	const [loading, setLoading] = useState(false);
 	const [products, setProducts] = useState([]);
+	const [scrollPercentage, setScrollPercentage] = useState(0);
 
 	const fetchUrl = async () => {
 		try {
@@ -26,6 +27,22 @@ const ScrollIndicator = ({ url }) => {
 			setLoading(false);
 		}
 	};
+
+	const handleScrollPercentage = () => {
+		console.log(
+			document.body.scrollTop,
+			document.documentElement.scrollTop,
+			document.documentElement.scrollHeight,
+			document.documentElement.clientHeight
+		);
+	};
+
+	useEffect(() => {
+		window.addEventListener('scroll', handleScrollPercentage);
+		handleScrollPercentage();
+
+		return () => window.removeEventListener('scroll', handleScrollPercentage);
+	}, []);
 
 	useEffect(() => {
 		if (url && url.length) fetchUrl();
