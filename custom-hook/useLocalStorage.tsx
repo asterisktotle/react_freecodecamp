@@ -1,25 +1,41 @@
-'use client';
 import { useEffect, useState } from 'react';
 
 const useLocalStorage = (key: string, defaultValue: string) => {
-	const [value, setValue] = useState(() => {
-		let currentValue;
+	//state that track if it is mounted or not
+	const [mounted, setMounted] = useState(false);
+	const [value, setValue] = useState(defaultValue);
 
-		try {
-			currentValue = JSON.parse(
-				localStorage.getItem(key) || String(defaultValue)
-			);
-		} catch (error) {
-			console.log(error);
-			currentValue = defaultValue;
-		}
-
-		return currentValue;
-	});
-
+	//first useEffect to handle mounting state
 	useEffect(() => {
-		localStorage.setItem(key, JSON.stringify(value));
-	}, [key, value]);
+		setMounted(true);
+	}, []);
+
+	// second useEffect to load from LocalStorage once mounted
+	useEffect(() => {
+		if (mounted) {
+			try {
+				const item = localStorage.getItem(key);
+
+				if (item) {
+					setValue(JSON.parse(item));
+				}
+			} catch (error) {
+				console.log('Error reading from local storage', error);
+				setValue(defaultValue);
+			}
+		}
+	}, [key, mounted, defaultValue]);
+
+	//save to LocalStorage when value changes
+	useEffect(() => {
+		if (mounted) {
+			try {
+				localStorage.setItem(key, JSON.stringify(value));
+			} catch (error) {
+				console.log('Error saving to local storage:', error);
+			}
+		}
+	}, [key, value, mounted]);
 
 	return [value, setValue];
 };
