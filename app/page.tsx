@@ -6,13 +6,14 @@ import ReviewsStar from '@/components/ReviewsStar';
 import ThemeSwitch from '@/components/ThemeSwitch';
 import TabsTest from '@/components/TabsTest';
 import Popup from '@/components/Popup';
-import PopupContent from '@/components/PopupContent';
+import GithubFinder from '@/components/GithubFinder';
 
 export default function Home() {
 	return (
 		<main className="flex min-h-screen flex-col">
 			<ThemeSwitch>
 				<Popup />
+				<GithubFinder />
 				{/* <TabsTest />
 				<QrCodeGenerator type={'text'} />
 				<Accordion />

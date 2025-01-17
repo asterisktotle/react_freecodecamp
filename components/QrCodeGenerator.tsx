@@ -12,13 +12,18 @@ const QrCodeGenerator = ({ type }) => {
 		setInput('');
 	};
 
+	const handleInputForm = (event) => {
+		setInput(event.target.value);
+	};
+
 	return (
 		<div className="flex flex-col items-center p-2 max-h-full">
 			<p>QrCodeGenerator</p>
 			<div>
 				<input
-					onChange={(e) => setInput(e.target.value)}
+					onChange={handleInputForm}
 					type={type}
+					value={input}
 					name="qr-code"
 					placeholder="Enter your name"
 					className="p-1 border-blue-500 border-2 rounded-md mr-2"
