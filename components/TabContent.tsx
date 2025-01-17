@@ -16,7 +16,7 @@ const TabContent = ({ tabsContent, onChange }) => {
 					tabsContent.map((tab, index) => (
 						<div key={tab.id} onClick={() => handleOnClick(index)}>
 							<span
-								className={` flex 
+								className={` flex cursor-pointer
 									${currentTabIndex === index ? 'bg-yellow-400' : 'bg-green-500'}`}
 							>
 								{tab.label}
