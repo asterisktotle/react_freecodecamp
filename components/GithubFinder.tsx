@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 const GithubFinder = () => {
 	const [input, setInput] = useState('asterisktotle');
@@ -31,7 +32,7 @@ const GithubFinder = () => {
 			setUserData(data);
 		} catch (error) {
 			console.error('Error occurred: ', error);
-			setUserData();
+			setUserData(null);
 			setLoading(false);
 		} finally {
 			setLoading(false);
@@ -46,9 +47,11 @@ const GithubFinder = () => {
 
 		return (
 			<div className="flex gap-5 py-5 items-center justify-center">
-				<img
+				<Image
 					src={avatar_url}
 					alt="user"
+					height={400}
+					width={400}
 					className="size-3/12 rounded-full border-green-600 border-[3px]"
 				/>
 

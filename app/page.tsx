@@ -7,13 +7,15 @@ import ThemeSwitch from '@/components/ThemeSwitch';
 import TabsTest from '@/components/TabsTest';
 import Popup from '@/components/Popup';
 import GithubFinder from '@/components/GithubFinder';
+import SearchAutoComplete from '@/components/SearchAutoComplete';
 
 export default function Home() {
 	return (
 		<main className="flex min-h-screen flex-col">
 			<ThemeSwitch>
 				<Popup />
-				<GithubFinder />
+				<SearchAutoComplete />
+				{/* <GithubFinder /> */}
 				{/* <TabsTest />
 				<QrCodeGenerator type={'text'} />
 				<Accordion />
