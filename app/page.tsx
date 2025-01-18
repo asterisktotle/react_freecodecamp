@@ -8,21 +8,26 @@ import TabsTest from '@/components/TabsTest';
 import Popup from '@/components/Popup';
 import GithubFinder from '@/components/GithubFinder';
 import SearchAutoComplete from '@/components/SearchAutoComplete';
+import FeatureFlags from '@/components/feature-flag/FeatureFlags';
+import FeatureFlagGlobalState from '@/components/feature-flag/FeatureFlagContext';
 
 export default function Home() {
 	return (
 		<main className="flex min-h-screen flex-col">
-			<ThemeSwitch>
+			{/* <ThemeSwitch>
 				<Popup />
 				<SearchAutoComplete />
-				{/* <GithubFinder /> */}
-				{/* <TabsTest />
+				<GithubFinder />
+				<TabsTest />
 				<QrCodeGenerator type={'text'} />
 				<Accordion />
 				<RandomColor />
 				<ReviewsStar numOfStars={5} />
-				<ImageSlider url="https://picsum.photos/v2/list" limit={10} page={2} /> */}
-			</ThemeSwitch>
+				<ImageSlider url="https://picsum.photos/v2/list" limit={10} page={2} />
+			</ThemeSwitch> */}
+			<FeatureFlagGlobalState>
+				<FeatureFlags />
+			</FeatureFlagGlobalState>
 		</main>
 	);
 }

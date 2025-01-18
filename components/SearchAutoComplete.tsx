@@ -18,31 +18,28 @@ const Suggestions = ({ data }) => {
 const SearchAutoComplete = () => {
 	const [loading, setLoading] = useState(false);
 	const [users, setUsers] = useState([]);
-	const [searchParam, setSearchParam] = useState('');
 	const [filteredUsers, setFilteredUsers] = useState([]);
-	const [showMessageError, setShowMessageError] = useState(null);
 	const [dropdown, setDropdown] = useState(false);
 
 	const fetchListOfUsers = async () => {
 		try {
 			setLoading(true);
-			const response = await fetch('https://dummyjson.com/users');
+			const response = await fetch('https://dummyjson.com/users?limit=50');
 
 			if (!response.ok) {
 				console.log('error');
 				setLoading(false);
-				setShowMessageError('error cannot fetch');
 				return;
 			}
 
 			const data = await response.json();
 
 			if (data && data.users.length > 0) {
-				const firstName = data.users.map((person) =>
-					person.firstName.toLowerCase()
+				const fullName = data.users.map(
+					(person) =>
+						person.firstName.toLowerCase() + ' ' + person.lastName.toLowerCase()
 				);
-				setUsers(firstName);
-				setShowMessageError(null);
+				setUsers(fullName);
 			}
 		} catch (error) {
 			console.error(error);
@@ -58,7 +55,6 @@ const SearchAutoComplete = () => {
 
 	const handleOnChange = (e) => {
 		const query = e.target.value.toLowerCase();
-		setSearchParam(query);
 		if (query.length > 0) {
 			const filteredData =
 				users && users.length
@@ -70,7 +66,7 @@ const SearchAutoComplete = () => {
 			setDropdown(false);
 		}
 	};
-	console.log(users, filteredUsers);
+
 	return (
 		<div>
 			{loading ? (
