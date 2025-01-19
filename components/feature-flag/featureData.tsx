@@ -3,6 +3,7 @@ const dummyAPI = {
 	showPopup: true,
 	showImageSlider: false,
 	showGithubFinder: true,
+	showSearchAutoComplete: true,
 };
 
 const featureFlagsDataServiceCall = () => {

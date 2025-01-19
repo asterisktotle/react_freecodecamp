@@ -27,7 +27,6 @@ const GithubFinder = () => {
 			}
 
 			const data = await response.json();
-			console.log(data);
 
 			setUserData(data);
 		} catch (error) {

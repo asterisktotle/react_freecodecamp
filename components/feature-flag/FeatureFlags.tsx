@@ -5,6 +5,7 @@ import GithubFinder from '../GithubFinder';
 import ImageSlider from '../ImageSlider';
 import Popup from '../Popup';
 import { FeatureFlagsContext } from './FeatureFlagContext';
+import SearchAutoComplete from '../SearchAutoComplete';
 
 const FeatureFlags = () => {
 	const { enabledFlags, loading } = useContext(FeatureFlagsContext);
@@ -27,6 +28,10 @@ const FeatureFlags = () => {
 		{
 			key: 'showGithubFinder',
 			component: <GithubFinder />,
+		},
+		{
+			key: 'showSearchAutoComplete',
+			component: <SearchAutoComplete />,
 		},
 	];
 

@@ -1,4 +1,5 @@
 'use client';
+import useFetch from '@/custom-hook/useFetch';
 import { useState, useEffect } from 'react';
 
 const Suggestions = ({ data }) => {
@@ -16,42 +17,25 @@ const Suggestions = ({ data }) => {
 };
 
 const SearchAutoComplete = () => {
-	const [loading, setLoading] = useState(false);
 	const [users, setUsers] = useState([]);
 	const [filteredUsers, setFilteredUsers] = useState([]);
 	const [dropdown, setDropdown] = useState(false);
+	const { data, error, pending } = useFetch({
+		url: 'https://dummyjson.com/users?limit=50',
+		options: {},
+	});
 
-	const fetchListOfUsers = async () => {
-		try {
-			setLoading(true);
-			const response = await fetch('https://dummyjson.com/users?limit=50');
-
-			if (!response.ok) {
-				console.log('error');
-				setLoading(false);
-				return;
-			}
-
-			const data = await response.json();
-
-			if (data && data.users.length > 0) {
-				const fullName = data.users.map(
-					(person) =>
-						person.firstName.toLowerCase() + ' ' + person.lastName.toLowerCase()
-				);
-				setUsers(fullName);
-			}
-		} catch (error) {
-			console.error(error);
-			setLoading(false);
-		} finally {
-			setLoading(false);
-		}
-	};
+	console.log(data, error, pending);
 
 	useEffect(() => {
-		fetchListOfUsers();
-	}, []);
+		if (data && data.users && users.length === 0) {
+			const fullName = data.users.map(
+				(person) =>
+					person.firstName.toLowerCase() + ' ' + person.lastName.toLowerCase()
+			);
+			setUsers(fullName);
+		}
+	}, [data, users]);
 
 	const handleOnChange = (e) => {
 		const query = e.target.value.toLowerCase();
@@ -69,7 +53,7 @@ const SearchAutoComplete = () => {
 
 	return (
 		<div>
-			{loading ? (
+			{pending ? (
 				<h1>Please Wait</h1>
 			) : (
 				<input
