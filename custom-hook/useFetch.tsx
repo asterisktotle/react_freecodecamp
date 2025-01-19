@@ -7,8 +7,8 @@ const useFetch = ({ url, options = {} }) => {
 	const [error, setError] = useState(null);
 
 	const fetchData = async () => {
+		setPending(true);
 		try {
-			setPending(true);
 			const response = await fetch(url, { ...options });
 			if (!response.ok) {
 				throw new Error(response.statusText);

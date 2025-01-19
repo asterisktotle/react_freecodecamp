@@ -17,11 +17,10 @@ const ItemMenu = ({ item }) => {
 			...displayCurrentChildren,
 			[getCurrentLabel]: !displayCurrentChildren[getCurrentLabel],
 		});
-		console.log(displayCurrentChildren);
 	};
 
 	return (
-		<li className="">
+		<li>
 			<div className="flex gap-2 justify-between">
 				<Link href={item.to}>{item.label}</Link>
 				{item && item.children && item.children.length ? (

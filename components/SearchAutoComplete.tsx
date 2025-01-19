@@ -25,8 +25,6 @@ const SearchAutoComplete = () => {
 		options: {},
 	});
 
-	console.log(data, error, pending);
-
 	useEffect(() => {
 		if (data && data.users && users.length === 0) {
 			const fullName = data.users.map(

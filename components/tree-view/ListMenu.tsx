@@ -1,4 +1,3 @@
-import React from 'react';
 import ItemMenu from './ItemMenu';
 
 const ListMenu = ({ list = [] }) => {
