@@ -10,11 +10,21 @@ import GithubFinder from '@/components/GithubFinder';
 import SearchAutoComplete from '@/components/SearchAutoComplete';
 import FeatureFlags from '@/components/feature-flag/FeatureFlags';
 import FeatureFlagGlobalState from '@/components/feature-flag/FeatureFlagContext';
+import ListOfRecipes from '@/components/recipe-app/ListOfRecipes';
+
+import NavBar from '@/components/recipe-app/NavBar';
+import ShowRecipe from '@/components/recipe-app/ShowRecipe';
 
 export default function Home() {
 	return (
 		<main className="flex min-h-screen flex-col">
-			{/* <ThemeSwitch>
+			<ListOfRecipes />
+		</main>
+	);
+}
+
+{
+	/* <ThemeSwitch>
 				<Popup />
 				<SearchAutoComplete />
 				<GithubFinder />
@@ -24,10 +34,10 @@ export default function Home() {
 				<RandomColor />
 				<ReviewsStar numOfStars={5} />
 				<ImageSlider url="https://picsum.photos/v2/list" limit={10} page={2} />
-			</ThemeSwitch> */}
-			<FeatureFlagGlobalState>
+			</ThemeSwitch> */
+}
+{
+	/* <FeatureFlagGlobalState>
 				<FeatureFlags />
-			</FeatureFlagGlobalState>
-		</main>
-	);
+			</FeatureFlagGlobalState> */
 }

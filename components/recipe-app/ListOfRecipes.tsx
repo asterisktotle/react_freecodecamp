@@ -1,42 +1,21 @@
 'use client';
 
 import useFetch from '@/custom-hook/useFetch';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
-
-const ShowRecipe = ({ id, name, image, ingredients }) => {
-	return (
-		<div
-			className="p-2 rounded-lg shadow-md w-fit flex flex-col justify-center item-center overflow-hidden h-full hover:bg-green-600 hover:text-white transition-all duration-500 ease-in-out"
-			key={id}
-		>
-			<div className="relative w-full h-full p-3 rounded-lg overflow-hidden">
-				<Image
-					className="overflow-hidden object-cover rounded-lg hover:scale-125 transition-transform duration-300 h-full"
-					src={image}
-					height={300}
-					width={300}
-					alt={name}
-				/>
-			</div>
-			<h2 className=" font-medium text-base text-center cursor-pointer">
-				{name}
-			</h2>
-		</div>
-	);
-};
+import ShowRecipe from './ShowRecipe';
+import { useContext, useEffect, useState } from 'react';
+import { GlobalContext } from './Context';
 
 const ListOfRecipes = () => {
-	const { data, pending, error } = useFetch({
-		url: 'https://dummyjson.com/recipes',
-		options: {},
-	});
+	// const { data, pending, error } = useFetch({
+	// 	url: 'https://dummyjson.com/recipes',
+	// 	options: {},
+	// });
 	const [allRecipes, setAllRecipes] = useState([]);
 
+	const { recipeList, loading, searchParam } = useContext(GlobalContext);
+
 	useEffect(() => {
-		if (data === null) return;
-		const recipes = data.recipes;
-		const recipeNames = recipes.map((item) => {
+		const recipeNames = recipeList.map((item) => {
 			return {
 				name: item.name,
 				id: item.id,
@@ -44,13 +23,13 @@ const ListOfRecipes = () => {
 				ingredients: item.ingredients,
 			};
 		});
-		console.log(recipeNames);
+		console.log('use effect triggered');
 		setAllRecipes(recipeNames);
-	}, [data]);
+	}, [searchParam]);
 
 	return (
-		<div className="sm:grid xl:grid-cols-5 lg:grid-cols-4 sm:grid-cols-3 flex flex-col items-center gap-1 mx-[3rem]">
-			{!pending ? (
+		<div className="sm:grid sm:grid-cols-3 xl:grid-cols-5 lg:grid-cols-4 p-2  w-full flex flex-col items-center gap-1 ">
+			{!loading ? (
 				allRecipes && allRecipes.length > 0 ? (
 					allRecipes.map((recipe) => {
 						const { id, name, image, ingredients } = recipe;
@@ -61,10 +40,15 @@ const ListOfRecipes = () => {
 								name={name}
 								image={image}
 								ingredients={ingredients}
+								showRecipe={false}
 							/>
 						);
 					})
-				) : null
+				) : (
+					<p className="font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+						Sorry but I have no recipe yet
+					</p>
+				)
 			) : (
 				<p>Please wait...</p>
 			)}
