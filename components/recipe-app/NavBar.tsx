@@ -7,7 +7,7 @@ import { GlobalContext } from './Context';
 const NavBar = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 
-	const { searchParam, setSearchParam, handleSubmit, loading, recipeList } =
+	const { searchParam, setSearchParam, handleSubmit } =
 		useContext(GlobalContext);
 
 	const menuList = [

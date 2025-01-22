@@ -1,0 +1,20 @@
+'use client';
+
+import { use } from 'react';
+import SelectedRecipe from '@/components/recipe-app/SelectedRecipe';
+
+const RecipeDetails = ({ params }: { params: Promise<{ id: number }> }) => {
+	const resolvedParams = use(params);
+
+	return (
+		<div>
+			{resolvedParams && resolvedParams.id ? (
+				<SelectedRecipe selectedId={resolvedParams.id} />
+			) : (
+				<p>Please search a recipe</p>
+			)}
+		</div>
+	);
+};
+
+export default RecipeDetails;
