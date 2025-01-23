@@ -1,4 +1,6 @@
 'use client';
+
+import { useRouter } from 'next/navigation';
 import { createContext, useState, ReactNode, FormEvent } from 'react';
 
 interface Recipe {
@@ -6,6 +8,7 @@ interface Recipe {
 	name: string;
 	image: string;
 	ingredients: string[];
+	isFavorite: boolean;
 }
 
 interface GlobalContextType {
@@ -16,7 +19,10 @@ interface GlobalContextType {
 	recipeList: Recipe[];
 	getRecipeDetails: (recipeId: number) => Promise<void>;
 	recipeDetails: Recipe | null;
+	handleAddFavorites: (recipeData: Recipe) => void;
+	favoriteList: Recipe[];
 }
+// NOTE: CHECK THE TYPE OF handleAddFavorites in typescript
 
 export const GlobalContext = createContext<GlobalContextType | null>(null);
 
@@ -25,9 +31,12 @@ export default function GlobalState({ children }: { children: ReactNode }) {
 	const [loading, setLoading] = useState(false);
 	const [recipeList, setRecipeList] = useState<Recipe[]>([]);
 	const [recipeDetails, setRecipeDetails] = useState<Recipe | null>(null);
+	const [favoriteList, setFavoriteList] = useState<Recipe[]>([]);
+	const router = useRouter();
 
 	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
+
 		try {
 			setLoading(true);
 			const response = await fetch(
@@ -44,6 +53,8 @@ export default function GlobalState({ children }: { children: ReactNode }) {
 			console.error('Cannot fetch', error);
 		} finally {
 			setLoading(false);
+
+			router.push('/Recipe_Home');
 		}
 	}
 
@@ -57,7 +68,6 @@ export default function GlobalState({ children }: { children: ReactNode }) {
 
 			if (data) {
 				setRecipeDetails(data);
-				console.log('this is the recipe ', data);
 			}
 		} catch (error) {
 			console.error('Cannot fetch', error);
@@ -66,6 +76,24 @@ export default function GlobalState({ children }: { children: ReactNode }) {
 			setLoading(false);
 		}
 	}
+
+	const handleAddFavorites = (getRecipeData) => {
+		const cpyFavoriteList = [...favoriteList];
+
+		const index = cpyFavoriteList.findIndex(
+			(item) => item.id === getRecipeData.id
+		);
+
+		if (index === -1) {
+			cpyFavoriteList.push({ ...getRecipeData });
+			console.log('favorite status: added');
+		} else {
+			cpyFavoriteList.splice(index, 1);
+			console.log('favorite status: removed');
+		}
+		setFavoriteList(cpyFavoriteList);
+		console.log(favoriteList);
+	};
 
 	return (
 		<GlobalContext.Provider
@@ -77,6 +105,8 @@ export default function GlobalState({ children }: { children: ReactNode }) {
 				handleSubmit,
 				getRecipeDetails,
 				recipeDetails,
+				handleAddFavorites,
+				favoriteList,
 			}}
 		>
 			{children}

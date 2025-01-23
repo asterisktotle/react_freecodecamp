@@ -49,6 +49,7 @@ const SelectedRecipe = ({ selectedId }) => {
 				image={recipeDetails.image}
 				ingredients={recipeDetails.ingredients || []}
 				showRecipe={true}
+				data={recipeDetails}
 			/>
 		</div>
 	);

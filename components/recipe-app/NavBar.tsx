@@ -1,14 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { GlobalContext } from './Context';
+import useLokalStorage from './useLokalStorage';
 
 const NavBar = () => {
-	const [currentPage, setCurrentPage] = useState(1);
-
 	const { searchParam, setSearchParam, handleSubmit } =
 		useContext(GlobalContext);
+
+	const [value, setValue] = useLokalStorage('tab', 'Home');
 
 	const menuList = [
 		{
@@ -25,6 +26,11 @@ const NavBar = () => {
 		},
 	];
 
+	const handleOnClick = (label) => {
+		setValue(label);
+		console.log('change the tabs to ', label);
+	};
+
 	return (
 		<div className="flex py-2 px-4 items-center justify-between">
 			<Link
@@ -34,16 +40,16 @@ const NavBar = () => {
 				{' '}
 				FoodHub{' '}
 			</Link>
-
+			{/* THIS WILL BE ONLY VISIBLE ON THE MOBILE DEVICE */}
 			<div className="flex gap-3 sm:hidden font-semibold">
 				{menuList.map((item) => (
 					<Link
 						className={`${
-							currentPage === item.id && 'border-b-green-700 border-b-2'
+							value === item.label && 'border-b-green-700 border-b-2'
 						}`}
 						key={item.id}
 						href={item.to}
-						onClick={() => setCurrentPage(item.id)}
+						onClick={() => handleOnClick(item.label)}
 					>
 						{item.label}{' '}
 					</Link>
@@ -58,15 +64,17 @@ const NavBar = () => {
 					onChange={(event) => setSearchParam(event.target.value)}
 				/>
 			</form>
+
+			{/* THIS WILL ONLY BE VISIBLE ON THE SMALL SIZE SCREEN AND ABOVE */}
 			<div className=" hidden sm:flex sm:gap-3 sm:font-semibold">
 				{menuList.map((item) => (
 					<Link
 						className={`${
-							currentPage === item.id && 'border-b-green-700 border-b-2'
+							value === item.label && 'border-b-green-700 border-b-2'
 						}`}
 						key={item.id}
 						href={item.to}
-						onClick={() => setCurrentPage(item.id)}
+						onClick={() => handleOnClick(item.label)}
 					>
 						{item.label}{' '}
 					</Link>

@@ -29,6 +29,7 @@ const ListOfRecipes = () => {
 								image={image}
 								ingredients={ingredients}
 								showRecipe={false}
+								data={recipe}
 							/>
 						);
 					})
