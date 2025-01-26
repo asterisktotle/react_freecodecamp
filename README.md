@@ -5,4 +5,13 @@ It composes of different project
 - QR code generator
 - custom hooks
 - image slider
-- 
+- feature flag
+- recipe app
+- tree view menu
+- pop up
+- random color
+- review star
+- tabs 
+- theme switcher 
+- auto autocomplete search
+
